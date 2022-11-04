@@ -17,8 +17,8 @@ def upload_page():
     if form.validate_on_submit():
         output = s3_upload(form.example)
         item = {
-            "image_url": "https://s3.amazonaws.com/" + app.config["S3_BUCKET"] + "/" + source_filename,
-            "name": source_filename,
+            "image_url": "https://s3.amazonaws.com/" + app.config["S3_BUCKET"] + "/" + output,
+            "name": output,
             "date": int(time())
         }
         flash('{src} uploaded to S3 as {dst}'.format(src=form.example.data.filename, dst=output))

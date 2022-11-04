@@ -1,33 +1,31 @@
-import boto
-from boto.dynamodb import connect_to_region
+import boto3
 from flask import current_app as app
 
 def dynamodb_put_item(item_data):
-	con = connect_to_region(aws_access_key_id=app.config["AWS_KEY"],
-		aws_secret_access_key=app.config["AWS_SECRET"],
-		region_name='us-east-1')
 
-	table = con.get_table(app.config["DYNAMODB_TABLE"])
+    session = boto3.Session(
+        aws_access_key_id=app.config["AWS_KEY"],
+        aws_secret_access_key=app.config["AWS_SECRET"],
+        aws_session_token=app.config["AWS_SESSION"]
+    )
 
-	item = table.new_item(
-		hash_key=item_data["image_url"],
-		# Our range key is 'subject'
-		range_key=item_data["date"],
-		# This has the
-		attrs=item_data
-	)
-	item.save()
+    dynamodb = session.resource("dynamodb")
 
-	return item
+    table = dynamodb.Table(app.config["DYNAMODB_TABLE"])
+
+    return table.put_item(Item=item_data)
+
 
 def dynamodb_scan():
 
-	con = connect_to_region(aws_access_key_id=app.config["AWS_KEY"],
-		aws_secret_access_key=app.config["AWS_SECRET"],
-		region_name='us-east-1')
+    session = boto3.Session(
+        aws_access_key_id=app.config["AWS_KEY"],
+        aws_secret_access_key=app.config["AWS_SECRET"],
+        aws_session_token=app.config["AWS_SESSION"]
+	)
 
-	table = con.get_table(app.config["DYNAMODB_TABLE"])
-	#for item in table.scan():
-	#	print item
+    dynamodb = session.resource("dynamodb")
 
-	return table.scan()
+    table = dynamodb.Table(app.config["DYNAMODB_TABLE"])
+
+    return table.scan()
