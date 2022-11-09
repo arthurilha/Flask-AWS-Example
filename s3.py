@@ -14,6 +14,7 @@ def s3_upload(source_file):
         aws_session_token=app.config["AWS_SESSION"]
     )
     s3.put_object(
+        ACL='public-read',
         Bucket=app.config["S3_BUCKET"],
         Key=source_filename,
         Body=source_file.data

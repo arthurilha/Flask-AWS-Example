@@ -28,4 +28,6 @@ def dynamodb_scan():
 
     table = dynamodb.Table(app.config["DYNAMODB_TABLE"])
 
-    return table.scan()
+    response = table.scan()
+
+    return response.get('Items', [])

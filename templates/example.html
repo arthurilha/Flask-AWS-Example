@@ -29,7 +29,7 @@
   {% for entry_row in entries | batch(4, '&nbsp;') %}
     <tr>
     {% for entry in entry_row %}
-      <td><img src="{{ entry.image_url }}" width="240"></img></td>
+      <td><a href="{{ entry.image_url }}"><img src="{{ entry.image_url }}" width="240"></img></a></td>
     {% endfor %}
     </tr>
   {% endfor %}
