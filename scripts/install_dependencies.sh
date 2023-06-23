@@ -1,5 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update
-sudo apt-get install -y python2.7 python-pip
-pip2 install Flask
+cd /home/ubuntu
+virtualenv -ppython3 venv
+source venv/bin/activate
+pip install -r requirements.txt
