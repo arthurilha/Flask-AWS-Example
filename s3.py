@@ -10,7 +10,7 @@ def s3_upload(source_file):
     s3 = boto3.client("s3")
     s3.put_object(
         ACL='public-read',
-        Bucket=app.config["S3_BUCKET"],
+        Bucket="trab-final2",
         Key=source_filename,
         Body=source_file.data
     )
