@@ -7,7 +7,7 @@ from time import time
 
 app = Flask(__name__)
 app.config.from_object("config")
-#
+
 class UploadForm(FlaskForm):
     example = FileField("Example File")
 
