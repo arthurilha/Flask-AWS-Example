@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.config.from_object("config")
 
 class UploadForm(FlaskForm):
-    example = FileField("Example Files")
+    example = FileField("Example Files aqui")
 
 @app.route("/", methods=["POST", "GET"])
 def upload_page():
